@@ -6,6 +6,7 @@ class ResultsScreen extends StatelessWidget {
   const ResultsScreen({
     super.key,
     required this.chosenAnswers,
+   
   });
 
   final List<String> chosenAnswers;
@@ -26,9 +27,16 @@ class ResultsScreen extends StatelessWidget {
 
     return summary;
   }
+  
 
   @override
   Widget build(context) {
+    final summaryData = getSummaryData();
+    final numTotalQuestions = questions.length;
+    final numCorrectQuestions = summaryData.where((data) {
+      return data['correct_answer'] == data['user_answer'];
+    }).length;
+
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -36,20 +44,43 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('You answered X out of Y questions Correctly'),
-            const SizedBox(
-              height: 30,
+            Text(
+              'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
-            QuestionsSummary(
-                summaryData:
-                    getSummaryData()), //Replaced with all the answers/questions
-            const SizedBox(
-              height: 30,
+            const SizedBox(height: 30),
+            SizedBox(
+              height: 350,
+              child: SingleChildScrollView(
+                child: QuestionsSummary(summaryData: summaryData),
+              ),
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('Restart Quiz'),
-            )
+            const SizedBox(height: 30),
+            OutlinedButton.icon(
+              icon: const Icon(
+                Icons.refresh,
+                size: 25,
+                color: Colors.white,
+              ),
+              onPressed: (){},
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 20,
+                ),
+              ),
+              label: Text(
+                "Restart Quiz",
+                style: TextStyle(
+                  //fontSize: 24,
+                ),
+              ),
+            ),
           ],
         ),
       ),

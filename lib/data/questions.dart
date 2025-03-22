@@ -46,4 +46,13 @@ const questions = [
       'They\'re the same Kong, it\'s just a redesign',
     ]
   ),
+  QuizQuestion (
+    'All but one of the seven Koopalings are named after what?',
+    [
+      'Musicians',
+      'Actors',
+      'Employees within Nintendo of America',
+      'Renaissance Painters',
+    ]
+  ),
 ];

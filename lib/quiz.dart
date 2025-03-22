@@ -22,7 +22,6 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswers.length == questions.length) {
       //switch to the results screen instead
       setState(() {
-        //selectedAnswers = [];
         activeScreen = ResultsScreen(chosenAnswers: selectedAnswers,);
       });
     }
@@ -41,6 +40,8 @@ class _QuizState extends State<Quiz> {
       );
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
